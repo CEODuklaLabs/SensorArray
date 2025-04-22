@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flowchartSaveContainer>
+    <flowchart>
+        <mainSegment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="layoutSegment" xmlID="0">
+            <element xsi:type="layoutElement" xmlID="1" parentSegment="0">
+                <startEnd>
+                    <borderColor>0,0,0,255</borderColor>
+                    <shapeUpColor>255,255,255,255</shapeUpColor>
+                    <shapeDownColor>230,230,230,255</shapeDownColor>
+                    <hasShadow>true</hasShadow>
+                    <customValue>Příkaz Get_MEAS</customValue>
+                    <commandsValid>true</commandsValid>
+                    <value>Příkaz Get_MEAS</value>
+                </startEnd>
+            </element>
+            <element xsi:type="layoutElement" xmlID="15" parentSegment="0">
+                <gotoLabel>
+                    <borderColor>0,0,0,255</borderColor>
+                    <shapeUpColor>255,255,255,255</shapeUpColor>
+                    <shapeDownColor>230,230,230,255</shapeDownColor>
+                    <hasShadow>true</hasShadow>
+                    <customValue>Start ADC
+Konverze</customValue>
+                    <commandsValid>true</commandsValid>
+                    <value>Start ADC
+Konverze</value>
+                </gotoLabel>
+            </element>
+            <element xsi:type="layoutElement" xmlID="5" parentSegment="0">
+                <subRoutine>
+                    <borderColor>0,0,0,255</borderColor>
+                    <shapeUpColor>255,255,255,255</shapeUpColor>
+                    <shapeDownColor>230,230,230,255</shapeDownColor>
+                    <hasShadow>true</hasShadow>
+                    <customValue>Spuštění ADC
+převodu na 
+všech kanálech</customValue>
+                    <commandsValid>true</commandsValid>
+                    <value>Spuštění ADC
+převodu na 
+všech kanálech</value>
+                </subRoutine>
+            </element>
+            <element xsi:type="layoutElement" xmlID="7" parentSegment="0">
+                <comment>
+                    <borderColor>0,0,0,255</borderColor>
+                    <shapeDownColor>230,230,230,255</shapeDownColor>
+                    <hasShadow>true</hasShadow>
+                    <customValue>Čekání na konverzi 
+z ADC převodníku</customValue>
+                    <commandsValid>true</commandsValid>
+                    <value>Čekání na konverzi 
+z ADC převodníku</value>
+                    <alwaysLeftAlign>false</alwaysLeftAlign>
+                    <relativeX>91.0</relativeX>
+                    <relativeY>-2.0</relativeY>
+                    <paired>false</paired>
+                </comment>
+            </element>
+            <element xsi:type="layoutElement" xmlID="6" parentSegment="0">
+                <decision>
+                    <borderColor>0,0,0,255</borderColor>
+                    <shapeUpColor>255,255,255,255</shapeUpColor>
+                    <shapeDownColor>230,230,230,255</shapeDownColor>
+                    <hasShadow>true</hasShadow>
+                    <customValue></customValue>
+                    <defaultValue>Actual_Cycle &lt; NUM_SAMPLES</defaultValue>
+                    <commands>
+                        <entry key="condition">Actual_Cycle &lt; NUM_SAMPLES</entry>
+                    </commands>
+                    <commandsValid>true</commandsValid>
+                    <value>Actual_Cycle &lt; NUM_SAMPLES</value>
+                </decision>
+                <segment xsi:type="layoutSegment" xmlID="8" parentElement="6">
+                    <element xsi:type="layoutElement" xmlID="3" parentSegment="8">
+                        <process>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <defaultValue>Actual_cycle ← 0</defaultValue>
+                            <commands>
+<entry key="var">Actual_cycle</entry>
+<entry key="value">0</entry>
+                            </commands>
+                            <commandsValid>true</commandsValid>
+                            <value>Actual_cycle ← 0</value>
+                        </process>
+                    </element>
+                    <element xsi:type="layoutElement" xmlID="4" parentSegment="8">
+                        <process>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <customValue>Channel_averages/NUM_SAMPLES</customValue>
+                            <commands>
+<entry key="var"></entry>
+<entry key="value"></entry>
+                            </commands>
+                            <commandsValid>true</commandsValid>
+                            <value>Channel_averages/NUM_SAMPLES</value>
+                        </process>
+                    </element>
+                    <element xsi:type="layoutElement" xmlID="10" parentSegment="8">
+                        <subRoutine>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <customValue>Channel_Averages 
+to 
+Temperatures</customValue>
+                            <commandsValid>true</commandsValid>
+                            <value>Channel_Averages 
+to 
+Temperatures</value>
+                        </subRoutine>
+                    </element>
+                    <element xsi:type="layoutElement" xmlID="11" parentSegment="8">
+                        <process>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <customValue>Channel_averages=0</customValue>
+                            <commandsValid>true</commandsValid>
+                            <value>Channel_averages=0</value>
+                        </process>
+                    </element>
+                    <description>Ne</description>
+                </segment>
+                <segment xsi:type="layoutSegment" xmlID="9" parentElement="6">
+                    <element xsi:type="layoutElement" xmlID="12" parentSegment="9">
+                        <process>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <defaultValue>Actual_cycle ← +1</defaultValue>
+                            <commands>
+<entry key="var">Actual_cycle</entry>
+<entry key="value">+1</entry>
+                            </commands>
+                            <commandsValid>true</commandsValid>
+                            <value>Actual_cycle ← +1</value>
+                        </process>
+                    </element>
+                    <element xsi:type="layoutElement" xmlID="13" parentSegment="9">
+                        <subRoutine>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <customValue>Přičtení hodnot 
+do průměru</customValue>
+                            <commandsValid>true</commandsValid>
+                            <value>Přičtení hodnot 
+do průměru</value>
+                        </subRoutine>
+                    </element>
+                    <element xsi:type="layoutElement" xmlID="14" parentSegment="9">
+                        <goto>
+                            <borderColor>0,0,0,255</borderColor>
+                            <shapeUpColor>255,255,255,255</shapeUpColor>
+                            <shapeDownColor>230,230,230,255</shapeDownColor>
+                            <hasShadow>true</hasShadow>
+                            <customValue>__
+Start ADC
+Konverze
+__</customValue>
+                            <defaultValue>__
+BR
+__</defaultValue>
+                            <commands>
+<entry key="mode">break</entry>
+                            </commands>
+                            <commandsValid>true</commandsValid>
+                            <value>__
+Start ADC
+Konverze
+__</value>
+                        </goto>
+                    </element>
+                    <description>Ano</description>
+                </segment>
+            </element>
+            <element xsi:type="layoutElement" xmlID="2" parentSegment="0">
+                <startEnd>
+                    <borderColor>0,0,0,255</borderColor>
+                    <shapeUpColor>255,255,255,255</shapeUpColor>
+                    <shapeDownColor>230,230,230,255</shapeDownColor>
+                    <hasShadow>true</hasShadow>
+                    <commandsValid>true</commandsValid>
+                    <value>Konec</value>
+                </startEnd>
+            </element>
+        </mainSegment>
+    </flowchart>
+</flowchartSaveContainer>
