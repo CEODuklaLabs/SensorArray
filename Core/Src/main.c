@@ -15,6 +15,8 @@
   *
   ******************************************************************************
   */
+
+#define ENABLE_UART
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -23,11 +25,13 @@
 #include "rtc.h"
 #include "spi.h"
 #include "tim.h"
-#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#if defined(ENABLE_UART)
+  #include "usart.h"
+#endif
 #include <string.h>
 /* USER CODE END Includes */
 
@@ -114,8 +118,13 @@ int main(void)
   MX_SPI1_Init();
   //MX_RTC_Init();
   //MX_TIM2_Init();
-  MX_USART2_UART_Init();
+  #if defined(ENABLE_UART)
+    MX_USART2_UART_Init();
+  #endif
   /* USER CODE BEGIN 2 */
+  #ifdef ENABLE_UART
+    HAL_UART_Transmit(&huart2, (uint8_t *)"UART Enabled\r\n", 14, HAL_MAX_DELAY);
+  #endif
   getCUCalib();
   getCycle();
   getNumSamples();
@@ -134,10 +143,32 @@ int main(void)
   HAL_Delay(1000);
   ZeroChannelAverages();
   StartADCConversion(); // Spustit ADC s DMA, uložit hodnoty do pole adc_values*/
-  
+  #if defined(ENABLE_UART)
+    HAL_UART_Transmit(&huart2, (uint8_t *)"UART Initialized\r\n", 19, HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (uint8_t *)"Hello from STM32!\r\n", 20, HAL_MAX_DELAY);
+  #endif
   while (1)
   {
+    HAL_Delay(1000);
+    #if defined(ENABLE_UART)
+      
+      if(STATUS == CUx_READY) {
+        HAL_UART_Transmit(&huart2, (uint8_t *)"Start Measurement\r\n", 20, HAL_MAX_DELAY);
+        StartADCConversion();
+      }
+      else if (STATUS == CUx_MEASUREMENT) {
+        HAL_UART_Transmit(&huart2, (uint8_t *)"Measurement in progress\r\n", 27, HAL_MAX_DELAY);
+      } else if (STATUS == CUx_MEASUREMENT_DONE) {
+        HAL_UART_Transmit(&huart2, (uint8_t *)"Measurement done\r\n", 18, HAL_MAX_DELAY);
+        HAL_UART_Transmit(&huart2, (uint8_t *)"Temperature values: ", 20, HAL_MAX_DELAY); 
+        HAL_UART_Transmit(&huart2, (uint8_t *)temperatureValues, sizeof(temperatureValues), HAL_MAX_DELAY);
+      }
+    #endif
+
+
     /* USER CODE END WHILE */
+
+
 
     /* USER CODE BEGIN 3 */
   }
@@ -250,6 +281,10 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
         Process_ADC_Data();
         addDataToSPIBuffer((uint8_t*)temperatureValues, sizeof(temperatureValues), CUx_MEAS);
         STATUS = CUx_READY; //READY
+        #if defined(ENABLE_UART)
+          HAL_UART_Transmit(&huart2, (uint8_t *)"Measurement complete\r\n", 22, HAL_MAX_DELAY);
+          HAL_UART_Transmit(&huart2, (uint8_t *)temperatureValues, sizeof(temperatureValues), HAL_MAX_DELAY);
+        #endif
     }
 }
 

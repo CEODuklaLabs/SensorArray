@@ -74,7 +74,10 @@ typedef enum {
   CUx_OK = 0x00,
   CUx_READY = 0x01,
   CUx_BUSY,
-  CUx_MEASUREMENT
+  CUx_MEASUREMENT,
+  #if defined(ENABLE_UART)
+  CUx_MEASUREMENT_DONE
+  #endif
 } CUx_STATUS_TYPES;
 
 /* USER CODE END ET */
